@@ -7,9 +7,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/user', proxy('http://localhost:3001'))
+
 app.use('/', (req, res) => {
     res.json({
-        message: 'message received'
+        message: 'Inside API Gateway'
     })
 })
 
