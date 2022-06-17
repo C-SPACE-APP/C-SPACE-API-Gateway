@@ -11,8 +11,6 @@ app.use('/user', proxy('http://localhost:3002'))
 app.use('/auth', proxy('http://localhost:3003'))
 
 app.use('/', async (req, res) => {
-    console.log('hereeeeeeeeeeeeeeeee');
-    console.log(req.user);
     res.json({
                 message: 'Inside API Gateway'
             })
