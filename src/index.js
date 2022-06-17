@@ -9,6 +9,7 @@ app.use(express.json());
 
 app.use('/user', proxy('http://localhost:3002'))
 app.use('/auth', proxy('http://localhost:3003'))
+app.use('/tag', proxy('http://localhost:3004'))
 
 app.use('/', async (req, res) => {
     res.json({
