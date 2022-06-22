@@ -7,32 +7,33 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/user', proxy('http://localhost:3002'))
-app.use('/auth', proxy('http://localhost:3003'))
-app.use('/tag', proxy('http://localhost:3004'))
+app.use('/user', proxy('http://localhost:3002', {
+    proxyErrorHandler: function(err, res, next) {
+      switch (err && err.code) {
+        default:
+            return res.status(500).json({ message: 'Service Unavailable'})
+      }
+    }}))
+app.use('/auth', proxy('http://localhost:3003', {
+    proxyErrorHandler: function(err, res, next) {
+      switch (err && err.code) {
+        default:
+            return res.status(500).json({ message: 'Service Unavailable'})
+      }
+    }}))
+app.use('/tag', proxy('http://localhost:3004', {
+    proxyErrorHandler: function(err, res, next) {
+      switch (err && err.code) {
+        default:
+            return res.status(500).json({ message: 'Service Unavailable'})
+      }
+    }}))
 
 app.use('/', async (req, res) => {
     res.json({
                 message: 'Inside API Gateway'
             })
 })
-
-// app.use('/', async (req, res) => {
-//     // console.log(req.headers);
-//     // cookies = req.headers.cookie
-//     // console.log(cookies);
-//     const { data } = await axios({
-//         method: 'get',
-//         url: 'http://localhost:3003/getUser',
-//         headers: {
-//             cookie: req.headers.cookie
-//         }
-//     })
-//     console.log(data.User);
-//     res.json({
-//         message: 'Inside API Gateway'
-//     })
-// })
 
 const PORT = process.env.PORT || 3001
 
