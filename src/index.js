@@ -14,6 +14,7 @@ app.use('/user', proxy('http://localhost:3002', {
             return res.status(500).json({ message: 'Service Unavailable'})
       }
     }}))
+
 app.use('/auth', proxy('http://localhost:3003', {
     proxyErrorHandler: function(err, res, next) {
       switch (err && err.code) {
@@ -21,6 +22,7 @@ app.use('/auth', proxy('http://localhost:3003', {
             return res.status(500).json({ message: 'Service Unavailable'})
       }
     }}))
+
 app.use('/tag', proxy('http://localhost:3004', {
     proxyErrorHandler: function(err, res, next) {
       switch (err && err.code) {
@@ -28,6 +30,22 @@ app.use('/tag', proxy('http://localhost:3004', {
             return res.status(500).json({ message: 'Service Unavailable'})
       }
     }}))
+
+app.use('/interaction', proxy('http://localhost:3005', {
+  proxyErrorHandler: function(err, res, next) {
+    switch (err && err.code) {
+      default:
+          return res.status(500).json({ message: 'Service Unavailable'})
+    }
+  }}))
+  
+app.use('/post', proxy('http://localhost:3006', {
+  proxyErrorHandler: function(err, res, next) {
+    switch (err && err.code) {
+      default:
+          return res.status(500).json({ message: 'Service Unavailable'})
+    }
+  }}))
 
 app.use('/', async (req, res) => {
     res.json({
