@@ -56,6 +56,14 @@ app.use('/posttag', proxy('http://localhost:3007', {
     }
   }}))
 
+app.use('/comment', proxy('http://localhost:3007', {
+  proxyErrorHandler: function(err, res, next) {
+    switch (err && err.code) {
+      default:
+          return res.status(500).json({ message: 'Service Unavailable'})
+    }
+  }}))
+
 app.use('/', async (req, res) => {
     res.json({
                 message: 'Inside API Gateway'
