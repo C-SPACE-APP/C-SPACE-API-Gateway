@@ -56,7 +56,7 @@ app.use('/posttag', proxy('http://localhost:3007', {
     }
   }}))
 
-app.use('/comment', proxy('http://localhost:3007', {
+app.use('/comment', proxy('http://localhost:3008', {
   proxyErrorHandler: function(err, res, next) {
     switch (err && err.code) {
       default:
