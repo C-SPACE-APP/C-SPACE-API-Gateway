@@ -68,6 +68,14 @@ app.use('/comment', proxy('http://localhost:3008', {
     }
   }}))
 
+app.use('/detail', proxy('http://localhost:3009', {
+  proxyErrorHandler: function(err, res, next) {
+    switch (err && err.code) {
+      default:
+          return res.status(500).json({ message: 'Service Unavailable'})
+    }
+  }}))
+
 app.use('/', async (req, res) => {
     res.json({
                 message: 'Inside API Gateway'
