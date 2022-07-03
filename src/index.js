@@ -19,8 +19,10 @@ app.use('/user', proxy('http://localhost:3002', {
       }
     }}))
 
-app.use('/auth', proxy('http://localhost:3003', {
+app.use('/auth', proxy('http://auth-service:3003', {
     proxyErrorHandler: function(err, res, next) {
+	    console.log(err)
+	    console.log(err.code)
       switch (err && err.code) {
         default:
             return res.status(500).json({ message: 'Service Unavailable'})

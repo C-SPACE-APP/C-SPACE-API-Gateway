@@ -5,3 +5,9 @@ services:
     build: .
     ports:
       - '3001:3001'
+    networks:
+      - cspace-backend
+
+networks:
+  cspace-backend:
+      external: true
