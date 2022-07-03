@@ -11,7 +11,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.use('/user', proxy('http://localhost:3002', {
+app.use('/user', proxy('http://user-service:3002', {
     proxyErrorHandler: function(err, res, next) {
       switch (err && err.code) {
         default:
